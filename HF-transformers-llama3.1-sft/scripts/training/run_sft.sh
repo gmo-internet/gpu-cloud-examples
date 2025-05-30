@@ -1,6 +1,7 @@
 #!/bin/bash
-
-work_dir=${1:-$HOME/gmo-gpucloud-example}
+# GMO Internet, Inc.
+#SBATCH --job-name=HF-transformers-llama3.1-sft
+#SBATCH -o priv_gpu-cloud-examples/HF-transformers-llama3.1-sft/logs/%x.%j.log
 
 lr=1e-4
 lora_rank=64
@@ -19,8 +20,6 @@ max_seq_length=2048
 output_dir=$work_dir/output
 validation_file=$work_dir/LLM-Research/dataset/alpaca_cleaned_ja.json
 
-source $work_dir/scripts/activate_env.sh $work_dir
-
 gpu_count=$(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l)
 if [ -z "$SLURM_GPUS" ]; then
     export NPROC_PER_NODE=$gpu_count
@@ -31,8 +30,14 @@ export NNODES=$SLURM_NNODES
 export NODE_RANK=$SLURM_NODEID
 export MASTER_PORT=8111
 
-source $work_dir/scripts/get_master_addr.sh
-source $work_dir/scripts/set_env_vars.sh
+source $work_dir/scripts/setup_env.sh
+source $work_dir/../tools/get_master_addr.sh
+
+#### DEBUG
+echo "NNODES=${NNODES}"
+echo "NODE_RANK=${SLURM_NODEID}"
+echo "MASTER_NODE_ADDR=${MASTER_ADDR}"
+echo "MASTER_NODE_PORT=${MASTER_PORT}"
 
 torchrun \
     --nnodes ${NNODES} \

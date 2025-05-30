@@ -4,6 +4,10 @@
 echo "Loading environment"
 
 # ENVIRONMENT
+if [ "$SLURM_NNODES" -eq 1 ]; then
+  export NCCL_P2P_LEVEL=NVL
+fi
+
 export NCCL_IB_TC=96
 export NCCL_IB_SL=1
 export NCCL_IB_GID_INDEX=3
@@ -23,5 +27,6 @@ export NCCL_LIB_DIR=/opt/share/modules/spack/v24.09/linux-ubuntu22.04-x86_64_v4/
 export NCCL_INCLUDE_DIR=/opt/share/modules/spack/v24.09/linux-ubuntu22.04-x86_64_v4/gcc-11.4.0/nccl-2.21.5-1-4gaygcfzk6l7jw34v5asjz7mdy2yngoj/include
 export USE_SYSTEM_NCCL=1
 export TORCH_EXTENSIONS_DIR=/scratch/torch-extensions
+export OMP_NUM_THREADS=$(nproc)
 
 echo "Loaded environment"
