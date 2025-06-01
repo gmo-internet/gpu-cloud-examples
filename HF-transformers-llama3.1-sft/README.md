@@ -12,8 +12,8 @@
 ```bash
 /* GMO GPU クラウド ログインノードへ ログイン後作業 */
 $ mkdir work && cd work
-$ export work_dir="$(pwd)/priv_gpu-cloud-examples/HF-transformers-llama3.1-sft"
-$ git clone https://github.com/gmo-internet/priv_gpu-cloud-examples && cd HF-transformers-llama3.1-sft
+$ export work_dir="$(pwd)/gpu-cloud-examples/HF-transformers-llama3.1-sft"
+$ git clone https://github.com/gmo-internet/gpu-cloud-examples && cd HF-transformers-llama3.1-sft
 ```
 ### 2. モジュールロード
 ```bash
@@ -81,5 +81,5 @@ e.g.)
 #### 実行結果の確認
 実行結果の出力先は実行シェルスクリプト（`$work_dir/scripts/training/run_sft.sh`）の冒頭に記載されている出力先にアウトプットされます。そのほかにも多数 `SBATCH` オプションがありますが、詳細はマニュアルを参照して下さい。
 ```bash
-#SBATCH -o priv_gpu-cloud-examples/HF-transformers-llama3.1-sft/logs/%x.%j.log
+#SBATCH -o gpu-cloud-examples/HF-transformers-llama3.1-sft/logs/%x.%j.log
 ```
