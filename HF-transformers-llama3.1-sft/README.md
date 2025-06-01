@@ -83,3 +83,14 @@ e.g.)
 ```bash
 #SBATCH -o gpu-cloud-examples/HF-transformers-llama3.1-sft/logs/%x.%j.log
 ```
+
+例えば以下のようにジョブの進捗を確認することができます。学習を開始すると `loss` や `learning_rate`、`epoch` が繰り返し出力されます。規定されたエポック数（デフォルトは 3）に達すれば学習は終了になります。
+```bash
+(.venv) $ tail -f $work_dir/logs/HF-transformers-llama3.1-sft.<JobID>.log
+...
+
+{'loss': 1.8908, 'grad_norm': 24.25, 'learning_rate': 0.0, 'epoch': 0.0} <<< ★ 学習開始 
+{'loss': 1.7554, 'grad_norm': 3.515625, 'learning_rate': 2.4324324324324327e-05, 'epoch': 0.02}
+{'loss': 1.5077, 'grad_norm': 1.453125, 'learning_rate': 5.135135135135135e-05, 'epoch': 0.05}
+...
+```
