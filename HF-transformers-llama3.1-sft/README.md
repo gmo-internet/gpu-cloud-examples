@@ -42,7 +42,7 @@ part-group_xxxxxx    up   infinite      X   idle xxx-xxx-xxxx
 ```
 ### 5. モデルのダウンロード
 ```bash
-(.venv)$ srun -p <PARTITION NAME> huggingface-cli login
+(.venv)$ huggingface-cli login
 
     _|    _|  _|    _|    _|_|_|    _|_|_|  _|_|_|  _|      _|    _|_|_|      _|_|_|_|    _|_|      _|_|_|  _|_|_|_|
     _|    _|  _|    _|  _|        _|          _|    _|_|    _|  _|            _|        _|    _|  _|        _|
@@ -59,7 +59,7 @@ Login successful.
 The current active token is: `xxxxxxxx`
 
 /* モデルのダウンロード */
-(.venv) $ huggingface-cli download meta-llama/Llama-3.1-8B-Instruct \
+(.venv) $ srun -p <PARTITION NAME> huggingface-cli download meta-llama/Llama-3.1-8B-Instruct \
 > --local-dir $work_dir/LLM-Research/Meta-Llama-3.1-8B-Instruct
 ...
 ```
