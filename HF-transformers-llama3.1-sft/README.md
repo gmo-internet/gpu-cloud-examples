@@ -75,7 +75,7 @@ The current active token is: `xxxxxxxx`
 > -N <Number of Nodes> \
 > --gpus-per-node=<Number of GPUs per Node> \
 > --export=ALL \
-$work_dir/scripts/training/run_sft.sh
+$work_dir/multi_node_sft.sbatch
 ...
 
 e.g.)
@@ -84,7 +84,7 @@ e.g.)
 > -N 2 \
 > --gpus-per-node=8 \
 > --export=ALL \
-> $work_dir/scripts/training/run_sft.sh
+> $work_dir/multi_node_sft.sbatch
 ```
 #### 実行結果の確認
 実行結果の出力先は実行シェルスクリプト（`$work_dir/scripts/training/run_sft.sh`）の冒頭に記載されている出力先にアウトプットされます。そのほかにも多数 `SBATCH` オプションがありますが、詳細はマニュアルを参照して下さい。
