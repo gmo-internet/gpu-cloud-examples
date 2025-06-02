@@ -75,7 +75,7 @@ The current active token is: `xxxxxxxx`
 > -N <Number of Nodes> \
 > --gpus-per-node=<Number of GPUs per Node> \
 > --export=ALL \
-$work_dir/multi_node_sft.sbatch
+> $work_dir/multi_node_sft.sbatch
 ...
 
 e.g.)
