@@ -13,7 +13,7 @@
 /* GMO GPU クラウド ログインノードへ ログイン後作業 */
 $ mkdir work && cd work
 $ export work_dir="$(pwd)/gpu-cloud-examples/HF-transformers-llama3.1-sft" 
-$ git clone https://github.com/gmo-internet/gpu-cloud-examples && $work_dir
+$ git clone https://github.com/gmo-internet/gpu-cloud-examples && cd $work_dir
 ```
 ### 2. モジュールロード
 ```bash
