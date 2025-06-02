@@ -1,7 +1,7 @@
 #!/bin/bash
 # GMO Internet, Inc.
 #SBATCH --job-name=HF-transformers-llama3.1-sft
-#SBATCH -o gpu-cloud-examples/HF-transformers-llama3.1-sft/logs/%x.%j.log
+#SBATCH -o logs/%x.%j.log
 
 lr=1e-4
 lora_rank=64

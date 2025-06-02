@@ -12,13 +12,13 @@
 ```bash
 /* GMO GPU クラウド ログインノードへ ログイン後作業 */
 $ mkdir work && cd work
-$ export work_dir="$(pwd)/gpu-cloud-examples/HF-transformers-llama3.1-sft"
-$ git clone https://github.com/gmo-internet/gpu-cloud-examples && cd HF-transformers-llama3.1-sft
+$ export work_dir="$(pwd)/gpu-cloud-examples/HF-transformers-llama3.1-sft" 
+$ git clone https://github.com/gmo-internet/gpu-cloud-examples && $work_dir
 ```
 ### 2. モジュールロード
 ```bash
 /* ファイルに記載の module が自動でロードされます */
-$ source  $work_dir/scripts/module_load.sh
+$ source $work_dir/scripts/module_load.sh
 Modules loaded on xxxxxxxx.gmo-gpu.io
 ```
 ### 3. Python 仮想環境の作成
@@ -42,7 +42,7 @@ part-group_xxxxxx    up   infinite      X   idle xxx-xxx-xxxx
 ```
 ### 5. モデルのダウンロード
 ```bash
-(.venv)$ huggingface-cli login
+(.venv)$ srun -p <PARTITION NAME> huggingface-cli login
 
     _|    _|  _|    _|    _|_|_|    _|_|_|  _|_|_|  _|      _|    _|_|_|      _|_|_|_|    _|_|      _|_|_|  _|_|_|_|
     _|    _|  _|    _|  _|        _|          _|    _|_|    _|  _|            _|        _|    _|  _|        _|
@@ -71,17 +71,25 @@ The current active token is: `xxxxxxxx`
 ```
 ### 7. 学習の実行
 ```bash
-(.venv) $ sbatch -p <PARTITION NAME> -N <Number of Nodes> --gpus-per-node=<Number of GPUs per Node> $work_dir/scripts/training/run_sft.sh
+(.venv) $ sbatch -p <PARTITION NAME> \
+> -N <Number of Nodes> \
+> --gpus-per-node=<Number of GPUs per Node> \
+> --export=ALL \
+$work_dir/scripts/training/run_sft.sh
 ...
 
 e.g.)
 /* 2Node で 1Node あたり 8GPU で学習（合計 16GPU） */
-(.venv) $ sbatch -p part-group_gmoded -N 2 --gpus-per-node=4 $work_dir/scripts/training/run_sft.sh
+(.venv) $ sbatch -p part-group_gmoded \
+> -N 2 \
+> --gpus-per-node=8 \
+> --export=ALL \
+> $work_dir/scripts/training/run_sft.sh
 ```
 #### 実行結果の確認
 実行結果の出力先は実行シェルスクリプト（`$work_dir/scripts/training/run_sft.sh`）の冒頭に記載されている出力先にアウトプットされます。そのほかにも多数 `SBATCH` オプションがありますが、詳細はマニュアルを参照して下さい。
 ```bash
-#SBATCH -o gpu-cloud-examples/HF-transformers-llama3.1-sft/logs/%x.%j.log
+#SBATCH -o logs/%x.%j.log
 ```
 
 例えば以下のようにジョブの進捗を確認することができます。学習を開始すると `loss` や `learning_rate`、`epoch` が繰り返し出力されます。規定されたエポック数（デフォルトは 3）に達すれば学習は終了になります。
