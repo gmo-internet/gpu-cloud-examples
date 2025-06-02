@@ -80,7 +80,7 @@ $work_dir/scripts/training/run_sft.sh
 
 e.g.)
 /* 2Node で 1Node あたり 8GPU で学習（合計 16GPU） */
-(.venv) $ sbatch -p part-group_gmoded \
+(.venv) $ sbatch -p part-group_abc123 \
 > -N 2 \
 > --gpus-per-node=8 \
 > --export=ALL \
