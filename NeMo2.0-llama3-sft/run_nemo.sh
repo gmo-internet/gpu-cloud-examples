@@ -5,11 +5,11 @@
 module load singularitypro/4.1
 
 # コンテナイメージのパス
-CONTAINER_IMAGE="/home/$(id -un)/NeMo2.0_SFT/nemo_24.12.sif"
+CONTAINER_IMAGE="$work_dir/nemo_24.12.sif"
 
 # ホストディレクトリをコンテナ内にマウント
-WORK_SPACE_PATH="/home/$(id -un)/NeMo2.0_SFT:/workspace"
-TMP_PATH="/home/$(id -un)/NeMo2.0_SFT/tmp:/tmp"
+WORK_SPACE_PATH="$work_dir:/workspace"
+TMP_PATH="/tmp:/tmp"
 
 #SFTの環境変数の設定
 source ../tools/get_master_addr.sh # Set MASTER_ADDR
