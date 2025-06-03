@@ -22,9 +22,10 @@ $ module load singularitypro
 ```
 ### 3. NeMo コンテナの準備
 ```bash
-/* イメージを pull するための認証情報を準備 */
+/* Singularity に関する環境変数を準備 */
 $ export SINGULARITY_DOCKER_USERNAME=$(whoami)
 $ export SINGULARITY_DOCKER_PASSWORD=<アカウントのパスワード>
+$ export SINGULARITYENV_PYTHONUSERBASE=/usr/local/lib/python3.10/dist-packages
 
 /* 利用可能なパーティション名を確認 */
 $ snodes
@@ -99,18 +100,19 @@ e.g.)
 $ sbatch -p part-group_abc123 -N 2 --gpus-per-node=8 --export=ALL ./run_nemo.sh
 ```
 #### 実行結果の確認
-実行結果の出力先は実行シェルスクリプト（`$work_dir/scripts/training/run_sft.sh`）の冒頭に記載されている出力先にアウトプットされます。そのほかにも多数 `SBATCH` オプションがありますが、詳細はマニュアルを参照して下さい。
+実行結果の出力先は実行シェルスクリプト（`$work_dir/run_nemo.sh`）の冒頭に記載されている出力先にアウトプットされます。そのほかにも多数 `SBATCH` オプションがありますが、詳細はマニュアルを参照して下さい。
 ```bash
 #SBATCH -o logs/%x.%j.out
 ```
 
-例えば以下のようにジョブの進捗を確認することができます。学習を開始すると `loss` や `learning_rate`、`epoch` が繰り返し出力されます。規定されたエポック数（デフォルトは 3）に達すれば学習は終了になります。
+例えば以下のようにジョブの進捗を確認することができます。学習を開始すると `train_loss` や `lr`、`epoch` が繰り返し出力されます。規定されたステップ数に達すれば学習は終了になります。
 ```bash
 $ tail -f tail -f $work_dir/logs/sft_nemo2.0.<JobID>.out
 ...
 
-{'loss': 1.8908, 'grad_norm': 24.25, 'learning_rate': 0.0, 'epoch': 0.0} <<< ★ 学習開始 
-{'loss': 1.7554, 'grad_norm': 3.515625, 'learning_rate': 2.4324324324324327e-05, 'epoch': 0.02}
-{'loss': 1.5077, 'grad_norm': 1.453125, 'learning_rate': 5.135135135135135e-05, 'epoch': 0.05}
+Training epoch 0, iteration 0/99 | lr: 1.961e-06 | global_batch_size: 64 | global_step: 0 | reduced_train_loss: 2.064 <<< ★ 学習開始 
+Training epoch 0, iteration 1/99 | lr: 3.922e-06 | global_batch_size: 64 | global_step: 1 | reduced_train_loss: 2.008 | consumed_samples: 128
+Training epoch 0, iteration 2/99 | lr: 5.882e-06 | global_batch_size: 64 | global_step: 2 | reduced_train_loss: 1.987 | consumed_samples: 192
+Training epoch 0, iteration 3/99 | lr: 7.843e-06 | global_batch_size: 64 | global_step: 3 | reduced_train_loss: 1.916 | consumed_samples: 256
 ...
 ```
