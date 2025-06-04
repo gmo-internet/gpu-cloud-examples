@@ -87,14 +87,14 @@ e.g.)
 > $work_dir/multi_node_sft.sbatch
 ```
 #### 実行結果の確認
-実行結果の出力先は実行シェルスクリプト（`$work_dir/scripts/training/run_sft.sh`）の冒頭に記載されている出力先にアウトプットされます。そのほかにも多数 `SBATCH` オプションがありますが、詳細はマニュアルを参照して下さい。
+実行結果の出力先は実行シェルスクリプト（`$work_dir/multi_node_sft.sbatch`）の冒頭に記載されている出力先にアウトプットされます。そのほかにも多数 `SBATCH` オプションがありますが、詳細はマニュアルを参照して下さい。
 ```bash
-#SBATCH -o logs/%x.%j.log
+#SBATCH -o logs/%x.%j.out.log
 ```
 
 例えば以下のようにジョブの進捗を確認することができます。学習を開始すると `loss` や `learning_rate`、`epoch` が繰り返し出力されます。規定されたエポック数（デフォルトは 3）に達すれば学習は終了になります。
 ```bash
-(.venv) $ tail -f $work_dir/logs/HF-transformers-llama3.1-sft.<JobID>.log
+(.venv) $ tail -f $work_dir/logs/multi_node_sft.<JobID>.out.log
 ...
 
 {'loss': 1.8908, 'grad_norm': 24.25, 'learning_rate': 0.0, 'epoch': 0.0} <<< ★ 学習開始 
