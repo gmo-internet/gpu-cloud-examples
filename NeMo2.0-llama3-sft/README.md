@@ -45,6 +45,7 @@ INFO:    Inserting Singularity configuration...
 INFO:    Creating SIF file...
 
 /* 必要な Python パッケージを追加インストール */
+$ export HF_TOKEN=<Huggingface Access Token>
 $ srun -p <PARTITOIN NAME> \
 > singularity exec \
 > -B $work_dir:/workspace \
@@ -57,9 +58,6 @@ The current active token is: `gmo-samples`
 ```
 ### 4. モデルのダウンロード
 ```bash
-/* Huggngface トークンをセット */
-$ export HF_TOKEN=<Huggingface Access Token>
-
 /* GPU を一枚使用して（-G 1）ダウンロードスクリプトを実行 */
 $ srun -p <PARTITOIN NAME> -G 1 \
 > singularity exec \
