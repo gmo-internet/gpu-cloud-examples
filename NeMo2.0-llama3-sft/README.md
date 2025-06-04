@@ -36,7 +36,7 @@ part-group_xxxxxx    up   infinite      X   idle xxx-xxx-xxxx
 
 /* 確認したパーティション名を指定して Slurm ジョブとして実行 */
 $ CONTAINER_IMAGE="$work_dir/nemo_24.12.sif"
-$ srun -p <PARTITIONA NAME> singularity pull $CONTAINER_IMAGE docker://creg.gmo-gpu.io/gpu-images/nvidia/nemo:24.12
+$ srun -p <PARTITION NAME> singularity pull $CONTAINER_IMAGE docker://creg.gmo-gpu.io/gpu-images/nvidia/nemo:24.12
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 INFO:    Fetching OCI image...
@@ -46,7 +46,7 @@ INFO:    Creating SIF file...
 
 /* 必要な Python パッケージを追加インストール */
 $ export HF_TOKEN=<Huggingface Access Token>
-$ srun -p <PARTITOIN NAME> \
+$ srun -p <PARTITION NAME> \
 > singularity exec \
 > -B $work_dir:/workspace \
 > -B /tmp:/tmp $CONTAINER_IMAGE \
@@ -59,7 +59,7 @@ The current active token is: `gmo-samples`
 ### 4. モデルのダウンロード
 ```bash
 /* GPU を一枚使用して（--gpus 1）ダウンロードスクリプトを実行 */
-$ srun -p <PARTITOIN NAME> --gpus 1 \
+$ srun -p <PARTITION NAME> --gpus 1 \
 > singularity exec \
 > -B $work_dir:/workspace \
 > -B /tmp:/tmp $CONTAINER_IMAGE \
@@ -68,7 +68,7 @@ $ srun -p <PARTITOIN NAME> --gpus 1 \
 ```
 ### 5. `databricks-dolly-15k` データセットのダウンロード
 ```bash
-$ srun -p <PARTITOIN NAME> \
+$ srun -p <PARTITION NAME> \
 > singularity exec \
 > -B $work_dir:/workspace \
 > -B /tmp:/tmp $CONTAINER_IMAGE \
@@ -77,7 +77,7 @@ $ srun -p <PARTITOIN NAME> \
 [INFO] DONE.
 
 /* データセットを学習用とバリデーション用に分割する */
-$ srun -p <PARTITOIN NAME> \
+$ srun -p <PARTITION NAME> \
 > singularity exec \
 > -B $work_dir:/workspace \
 > -B /tmp:/tmp $CONTAINER_IMAGE \
