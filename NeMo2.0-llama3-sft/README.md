@@ -58,8 +58,8 @@ The current active token is: `gmo-samples`
 ```
 ### 4. モデルのダウンロード
 ```bash
-/* GPU を一枚使用して（-G 1）ダウンロードスクリプトを実行 */
-$ srun -p <PARTITOIN NAME> -G 1 \
+/* GPU を一枚使用して（--gpus 1）ダウンロードスクリプトを実行 */
+$ srun -p <PARTITOIN NAME> --gpus 1 \
 > singularity exec \
 > -B $work_dir:/workspace \
 > -B /tmp:/tmp $CONTAINER_IMAGE \
@@ -105,7 +105,7 @@ $ sbatch -p part-group_abc123 -N 2 --gpus-per-node=8 --export=ALL ./run_nemo.sh
 
 例えば以下のようにジョブの進捗を確認することができます。学習を開始すると `train_loss` や `lr`、`epoch` が繰り返し出力されます。規定されたステップ数に達すれば学習は終了になります。
 ```bash
-$ tail -f tail -f $work_dir/logs/sft_nemo2.0.<JobID>.out
+$ tail -f $work_dir/logs/sft_nemo2.0.<JobID>.out
 ...
 
 Training epoch 0, iteration 0/99 | lr: 1.961e-06 | global_batch_size: 64 | global_step: 0 | reduced_train_loss: 2.064 <<< ★ 学習開始 
