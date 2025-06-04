@@ -14,6 +14,7 @@
 ## 連絡先
 このコンテンツに関するお問い合わせは[こちら](https://gpucloud.gmo/form/)のフォームよりお願いいたします。
 ## Author
+GMOインターネット株式会社, GMO GPUクラウド開発チーム
 ## 引用
 - [ymcui/Chinese-LLaMA-Alpaca-3](https://github.com/ymcui/Chinese-LLaMA-Alpaca-3)  
   Licensed under the Apache License, Version 2.0
