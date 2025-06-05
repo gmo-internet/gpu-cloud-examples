@@ -1,0 +1,8 @@
+HF-transformers-llama3.1-sft/LLM-Research
+HF-transformers-llama3.1-sft/logs
+HF-transformers-llama3.1-sft/output
+HF-transformers-llama3.1-sft/scripts/training/__pycache__
+NeMo2.0-llama3-sft/data
+NeMo2.0-llama3-sft/logs
+NeMo2.0-llama3-sft/nemo_24.12.sif
+NeMo2.0-llama3-sft/nemo_experiments
