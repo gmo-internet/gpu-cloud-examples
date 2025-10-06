@@ -5,7 +5,7 @@
 module load singularitypro/4.1
 
 # コンテナイメージのパス
-CONTAINER_IMAGE="$work_dir/nemo_24.12.sif"
+CONTAINER_IMAGE="$work_dir/nemo_25.07.sif"
 
 # ホストディレクトリをコンテナ内にマウント
 WORK_SPACE_PATH="$work_dir:/workspace"
