@@ -35,8 +35,8 @@ part-group_xxxxxx    up   infinite      X   idle xxx-xxx-xxxx
 ...
 
 /* 確認したパーティション名を指定して Slurm ジョブとして実行 */
-$ CONTAINER_IMAGE="$work_dir/nemo_24.12.sif"
-$ srun -p <PARTITION NAME> singularity pull $CONTAINER_IMAGE docker://creg.gmo-gpu.io/gpu-images/nvidia/nemo:24.12
+$ CONTAINER_IMAGE="$work_dir/nemo_25.07.sif"
+$ srun -p <PARTITION NAME> singularity pull $CONTAINER_IMAGE docker://creg.gmo-gpu.io/gpu-images/nvidia/nemo:25.07
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 INFO:    Fetching OCI image...
